@@ -1,0 +1,55 @@
+.todo__container {
+}
+
+.todo__item {
+    border: 1px solid #4b8673;
+    margin: 0.5rem;
+    border-radius: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: #cee5d0;
+}
+
+.todo__checkbox {
+    width: 30px;
+    height: 30px;
+}
+
+.todo__description {
+    font-family: "Caveat";
+    font-size: 28px;
+}
+
+.todo__date {
+    font-family: "Caveat";
+    font-size: 28px;
+}
+
+.todo__button-remove {
+    box-shadow: 4px 4px 7px 0px rgba(47, 47, 47, 0.2);
+    background-color: #ecb390;
+    border: none;
+    width: 35px;
+    border-radius: 70% 30% 50% 10%;
+    pointer-events: none;
+    opacity: 50%;
+}
+
+.todo__checkbox:checked ~ .todo__button-remove {
+    pointer-events: auto;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.todo__checkbox:checked ~ .todo__description {
+    text-decoration: line-through;
+}
+
+.noTodos {
+    font-family: "Open Sans";
+    font-size: 28px;
+    padding: 0.5em;
+    color: #94b49f;
+    text-align: center;
+}

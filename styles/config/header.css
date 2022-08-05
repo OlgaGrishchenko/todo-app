@@ -1,0 +1,71 @@
+body {
+    background: url(../../assets/bg_1.png) top/cover no-repeat rgba(198, 250, 198, 0.241);
+}
+
+.container {
+    margin: 3em auto;
+    max-width: 700px;
+    border: 1px solid #4B8673;
+}
+
+.header__title {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Open Sans';
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 56px;
+    padding: 0.5em;
+    color: #94B49F;
+}
+
+.todo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.todo__button-delete {
+    text-transform: uppercase;
+    text-transform: uppercase;
+    font-family: 'Open Sans';
+    font-size: 18px;
+    padding: .5em;
+    margin: .5em;
+    background-color: #ECB390;
+    border: none;
+    border-radius: 10% 30% 50% 70%;
+    box-shadow: 4px 4px 7px 0px rgba(47, 47, 47, 0.2);
+}
+
+.todo__button-delete:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.todo__input-add {
+    width: 65%;
+    border-radius: 5px;
+    border: 2px solid #4B8673;
+    font-family: 'Caveat';
+    font-size: 28px;
+    padding: 0 0.5em;
+}
+
+.todo__button-add {
+    text-transform: uppercase;
+    font-family: 'Open Sans';
+    font-size: 18px;
+    padding: .5em;
+    margin: .5em;
+    background-color: #94B49F;
+    border: none;
+    border-radius: 70% 30% 50% 10%;
+    box-shadow: 4px 4px 7px 0px rgba(47, 47, 47, 0.2);
+}
+
+.todo__button-add:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+

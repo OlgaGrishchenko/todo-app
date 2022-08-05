@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caveat&family=Open+Sans:wght@400;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles/style.css" />
+        <script src="todo.js" defer></script>
+        <title>To-do list</title>
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <h1 class="header__title">TODO LIST</h1>
+            </header>
+
+            <div class="todo">
+                <button
+                    class="todo__button-delete"
+                    data-button-delete-all
+                    type="button"
+                >
+                    Delete All
+                </button>
+                <input
+                    class="todo__input-add"
+                    data-input-add
+                    type="text"
+                    required
+                />
+                <button class="todo__button-add" data-button-add type="button">
+                    Add todo
+                </button>
+            </div>
+
+            <div class="todo__container" data-todos-container>
+                <template data-todo-item-template>
+                    <div class="todo__item" data-todo-item>
+                        <input
+                            type="checkbox"
+                            class="todo__checkbox"
+                            data-todo-checkbox
+                        />
+                        <div class="todo__description" data-todo-description>
+                            Hello
+                        </div>
+                        <div class="todo__date" data-todo-date>5.8.2022</div>
+                        <button
+                            class="todo__button-delete"
+                            data-todo-button-delete>
+                            ❌
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </body>
+</html>
