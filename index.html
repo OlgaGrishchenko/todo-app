@@ -23,7 +23,7 @@
 
             <div class="todo">
                 <button
-                    class="todo__button-delete"
+                    class="todo__button-delete-all"
                     data-button-delete-all
                     type="button"
                 >
@@ -40,26 +40,43 @@
                 </button>
             </div>
 
-            <div class="todo__container" data-todos-container>
-                <template data-todo-item-template>
-                    <div class="todo__item" data-todo-item>
+            <div class="todo__container" data-todo-container></div>
+
+            <template data-todo-item-template>
+                <div class="todo__item" data-todo-item>
+                    <div class="toggle dog-rollover">
                         <input
+                            id="doggo"
                             type="checkbox"
                             class="todo__checkbox"
                             data-todo-checkbox
                         />
-                        <div class="todo__description" data-todo-description>
-                            Hello
-                        </div>
-                        <div class="todo__date" data-todo-date>5.8.2022</div>
+                        <label
+                            class="toggle-item"
+                            for="doggo"
+                            data-todo-checkbox-label
+                        >
+                            <div class="dog">
+                                <div class="ear"></div>
+                                <div class="ear right"></div>
+                                <div class="face">
+                                    <div class="eyes"></div>
+                                    <div class="mouth"></div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <div class="todo__text" data-todo-text></div>
+                        <div class="todo__date" data-todo-date></div>
                         <button
                             class="todo__button-delete"
-                            data-todo-button-delete>
+                            data-todo-button-delete
+                        >
                             ❌
                         </button>
                     </div>
-                </template>
-            </div>
+                </div>
+            </template>
         </div>
     </body>
 </html>

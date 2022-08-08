@@ -1,90 +1,118 @@
-const todoItemTemplate = document.querySelector('[data-todo-item-template]');
-const todosList = document.querySelector('[data-todos-container]'); 
-const inputAdd = document.querySelector('[data-input-add]');
+const TODOS_KEY = 'todos';
+
+const inputTodoAdd = document.querySelector('[data-input-add]');
 const buttonAdd = document.querySelector('[data-button-add]');
+const todoItemTemplate = document.querySelector('[data-todo-item-template]');
+const todoContainer = document.querySelector('[data-todo-container]');
 const buttonDeleteAll = document.querySelector('[data-button-delete-all]');
 
+function saveToLocalStorage () {
+    localStorage.setItem(TODOS_KEY, JSON.stringify(todoList));
+};
 
-let todos; 
-!localStorage.todos ? todos = [] :todos = JSON.parse(localStorage.getItem('todos')); 
-
-const updateLocal = () => {
-        localStorage.setItem('todos', JSON.stringify(todos));
-    }
+let todoList = [];
 
 buttonAdd.addEventListener('click', () => {
-    const text = inputAdd.value.trim();
+    let inputValue = inputTodoAdd.value.trim();
 
-    const getUserTime = (date) => {
-        let D = date.getDate();
-        let M = date.getMonth() + 1;
-        let Y = date.getFullYear();
-        let H = date.getHours();
-        let m = date.getMinutes();
-        m < 10 ? (m = '0' + m) : m;
-        return `${D}-${M}-${Y} / ${H}:${m}`;
-      };
-
-    if(text) {
+    if (inputValue) {
         const newTodo = {
-            id : todos.length + 1,
-            text,
-            date: getUserTime(new Date()),
+            id: Date.now(),
+            text: inputValue,
+            date: getDate(),
+            isChecked: false,
         }
-        todos.push(newTodo);
-        inputAdd.value = '';
-    }
-    updateLocal();
-    inputAdd.focus();
+
+    todoList.push(newTodo);
+    inputTodoAdd.value = '';
+}
+
+inputTodoAdd.focus();
     render();
-})
+});
 
-buttonDeleteAll.addEventListener('click', () => {
-    todos.splice(0, todos.length);
-    updateLocal();
-    render();
-})
-
-
-
-function createTodoItem(id, text, date) {
+function createTodo(id, text, isChecked) {
     const todoItem = document.importNode(todoItemTemplate.content, true);
-    const todoData = todoItem.querySelector('[data-todo-date]');
-    todoData.textContent = `${date}`;
-    const todoDescription = todoItem.querySelector('[data-todo-description]');
-    todoDescription.textContent = text;
-    
-    const buttonDelete = todoItem.querySelector('[data-todo-button-delete]');
+    const todoItemText = todoItem.querySelector('[data-todo-text]');
 
-    buttonDelete.addEventListener('click', () => {
-        todos = todos.filter(todo => todo.id !== id)
-        updateLocal();
+    todoItemText.textContent = text;
+
+    const buttonTodoDelete = todoItem.querySelector('[data-todo-button-delete]');
+    buttonTodoDelete.addEventListener('click', deleteTodoItem);
+
+    const todoDate = todoItem.querySelector('[data-todo-date]');
+    todoDate.append(getDate());
+
+    function deleteTodoItem() {
+        todoList = todoList.filter(item => item.id !== id);
         render();
-    })
+    }
+
+    const checkToDoId = `doggo-${id}`
+    const checkTodoLabel = todoItem.querySelector('[data-todo-checkbox-label]');
+    checkTodoLabel.htmlFor = checkToDoId;
+
+    const checkTodo = todoItem.querySelector('[data-todo-checkbox]');
+    checkTodo.id = checkToDoId;
+    checkTodo.checked = isChecked;
+    checkTodo.addEventListener('change', () => {
+        const todo = todoList.find(item => item.id === id);
+        todo.isChecked = !todo.isChecked;
+        saveToLocalStorage();
+    });
 
     return todoItem;
-}
+};
 
-function clearTodoList() {
-    todosList.innerHTML = '';
-}
+function clearTodo() {
+    todoContainer.innerHTML = '';
+};
 
-function appendTodos() {
-    if (todos.length) {
-        todos.forEach(el => {
-            const todo = createTodoItem(el.id, el.text, el.date);
-            todosList.append(todo);
-        })
-    
+function appendTodo() {
+    if (todoList.length) {
+        todoList.forEach(element => {
+
+            const todo = createTodo(element.id, element.text, element.isChecked);
+            todoContainer.append(todo);
+        });
     } else {
-        todosList.insertAdjacentHTML('beforeend', `<p class = "noTodos"> No todos </p>` ) 
+        todoContainer.insertAdjacentHTML('beforeend', `<p class = "noTodos">No todo</p>`);
     }
-    updateLocal();
-}
+};
 
 function render() {
-    clearTodoList();
-    appendTodos();
-}
+    clearTodo();
+    appendTodo();
+    saveToLocalStorage();
+};
 
-render();
+function deleteAll() {
+    todoList = [];
+    render();
+};
+
+buttonDeleteAll.addEventListener('click', deleteAll);
+
+const getDate = () => {
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+
+    min < 10 ? (min = '0' + min) : min;
+    return `${day}.${month}.${year} ${hour}:${min}`;
+};
+
+function onRestart() {
+
+    const todos = localStorage.getItem(TODOS_KEY);
+
+    if (todos !== null) {
+        todoList = JSON.parse(todos)
+    }
+    render();
+};
+
+onRestart();
