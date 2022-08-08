@@ -5,6 +5,10 @@ const buttonAdd = document.querySelector('[data-button-add]');
 const todoItemTemplate = document.querySelector('[data-todo-item-template]');
 const todoContainer = document.querySelector('[data-todo-container]');
 const buttonDeleteAll = document.querySelector('[data-button-delete-all]');
+const inputAdd = document.querySelector('[data-input-add]');
+
+const taskActive = document.querySelector('[data-counter-active-span]');
+const taskCompleted = document.querySelector('[data-counter-completed-span]');
 
 function saveToLocalStorage () {
     localStorage.setItem(TODOS_KEY, JSON.stringify(todoList));
@@ -31,7 +35,27 @@ inputTodoAdd.focus();
     render();
 });
 
-function createTodo(id, text, isChecked) {
+inputAdd.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+    let inputValue = inputTodoAdd.value.trim();
+
+    if (inputValue) {
+        const newTodo = {
+            id: Date.now(),
+            text: inputValue,
+            date: getDate(),
+            isChecked: false,
+        }
+
+    todoList.push(newTodo);
+    inputTodoAdd.value = '';
+}
+
+inputTodoAdd.focus();
+    render();
+}});
+
+function createTodo(id, text, isChecked, date) {
     const todoItem = document.importNode(todoItemTemplate.content, true);
     const todoItemText = todoItem.querySelector('[data-todo-text]');
 
@@ -41,7 +65,7 @@ function createTodo(id, text, isChecked) {
     buttonTodoDelete.addEventListener('click', deleteTodoItem);
 
     const todoDate = todoItem.querySelector('[data-todo-date]');
-    todoDate.append(getDate());
+    todoDate.textContent = date;
 
     function deleteTodoItem() {
         todoList = todoList.filter(item => item.id !== id);
@@ -72,7 +96,7 @@ function appendTodo() {
     if (todoList.length) {
         todoList.forEach(element => {
 
-            const todo = createTodo(element.id, element.text, element.isChecked);
+            const todo = createTodo(element.id, element.text, element.isChecked, element.date);
             todoContainer.append(todo);
         });
     } else {
@@ -84,6 +108,9 @@ function render() {
     clearTodo();
     appendTodo();
     saveToLocalStorage();
+    taskCompleted.textContent = calcCompleted();
+    
+    taskActive.textContent = calcActive();
 };
 
 function deleteAll() {
@@ -102,6 +129,8 @@ const getDate = () => {
     let min = date.getMinutes();
 
     min < 10 ? (min = '0' + min) : min;
+    day < 10 ? (day = '0' + day) : day;
+    month < 10 ? (month = '0' + month) : month;
     return `${day}.${month}.${year} ${hour}:${min}`;
 };
 
@@ -116,3 +145,12 @@ function onRestart() {
 };
 
 onRestart();
+
+function calcCompleted() {
+    return todoList.filter((value) => value.isChecked === true).length;
+};
+
+function calcActive() {
+    return todoList.filter((value) => value.isChecked === false).length;
+};
+
