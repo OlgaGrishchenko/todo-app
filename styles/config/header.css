@@ -22,7 +22,7 @@ body {
 .todo {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .todo__button-delete-all {
@@ -67,7 +67,15 @@ body {
 .todo__button-add:hover {
     cursor: pointer;
     opacity: 0.8;
-};
+}
 
-
+.todo__search-input {
+    width: 90%;
+    border-radius: 5px;
+    border: 2px solid #4B8673;
+    font-family: 'Caveat';
+    font-size: 20px;
+    padding: 0 0.5em;
+    margin: 0 35px;
+}
 

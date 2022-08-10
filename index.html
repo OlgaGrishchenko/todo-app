@@ -33,14 +33,18 @@
                     class="todo__input-add"
                     data-input-add
                     type="text"
-                    required
+                    placeholder="enter task"
                 />
                 <button class="todo__button-add" data-button-add type="button">
                     Add todo
                 </button>
+
             </div>
 
+
+
             <div class="counter" data-counter>
+
                 <div class="counter__active" data-counter-active>
                     Active:
                     <span
@@ -55,6 +59,10 @@
                         data-counter-completed-span
                     ></span>
                 </div>
+            </div>
+
+            <div todo__search>
+                <input class="todo__search-input" data-input-search type="text" placeholder="search"/>
             </div>
 
             <div class="todo__container" data-todo-container></div>

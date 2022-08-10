@@ -6,6 +6,7 @@ const todoItemTemplate = document.querySelector('[data-todo-item-template]');
 const todoContainer = document.querySelector('[data-todo-container]');
 const buttonDeleteAll = document.querySelector('[data-button-delete-all]');
 const inputAdd = document.querySelector('[data-input-add]');
+const inputSearch = document.querySelector('[data-input-search]');
 
 const taskActive = document.querySelector('[data-counter-active-span]');
 const taskCompleted = document.querySelector('[data-counter-completed-span]');
@@ -15,6 +16,7 @@ function saveToLocalStorage () {
 };
 
 let todoList = [];
+let filteredTodoList = [];
 
 buttonAdd.addEventListener('click', () => {
     let inputValue = inputTodoAdd.value.trim();
@@ -83,6 +85,8 @@ function createTodo(id, text, isChecked, date) {
         const todo = todoList.find(item => item.id === id);
         todo.isChecked = !todo.isChecked;
         saveToLocalStorage();
+        taskActive.textContent = calcActive();
+    taskCompleted.textContent = calcCompleted();
     });
 
     return todoItem;
@@ -107,10 +111,9 @@ function appendTodo() {
 function render() {
     clearTodo();
     appendTodo();
-    saveToLocalStorage();
-    taskCompleted.textContent = calcCompleted();
-    
+    saveToLocalStorage();  
     taskActive.textContent = calcActive();
+    taskCompleted.textContent = calcCompleted();
 };
 
 function deleteAll() {
@@ -154,3 +157,13 @@ function calcActive() {
     return todoList.filter((value) => value.isChecked === false).length;
 };
 
+inputSearch.addEventListener ('input', () => {
+    let valueSearch = inputSearch.value.toLowerCase();
+    if (valueSearch) {
+    filteredTodoList = todoList.filter((el) =>
+    el.text.toLowerCase().includes(valueSearch)
+  );
+  todoList = filteredTodoList;
+  render();
+}
+});
