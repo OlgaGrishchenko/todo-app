@@ -38,13 +38,9 @@
                 <button class="todo__button-add" data-button-add type="button">
                     Add todo
                 </button>
-
             </div>
 
-
-
             <div class="counter" data-counter>
-
                 <div class="counter__active" data-counter-active>
                     Active:
                     <span
@@ -62,44 +58,44 @@
             </div>
 
             <div todo__search>
-                <input class="todo__search-input" data-input-search type="text" placeholder="search"/>
+                <input
+                    class="todo__search-input"
+                    data-input-search
+                    type="text"
+                    placeholder="search"
+                />
             </div>
 
             <div class="todo__container" data-todo-container></div>
 
             <template data-todo-item-template>
-                <div class="todo__item" data-todo-item>
-                    <div class="toggle dog-rollover">
-                        <input
-                            id="doggo"
-                            type="checkbox"
-                            class="todo__checkbox"
-                            data-todo-checkbox
-                        />
-                        <label
-                            class="toggle-item"
-                            for="doggo"
-                            data-todo-checkbox-label
-                        >
-                            <div class="dog">
-                                <div class="ear"></div>
-                                <div class="ear right"></div>
-                                <div class="face">
-                                    <div class="eyes"></div>
-                                    <div class="mouth"></div>
-                                </div>
+                <div class="toggle dog-rollover todo__item" data-todo-item>
+                    <input
+                        id="doggo"
+                        type="checkbox"
+                        class="todo__checkbox"
+                        data-todo-checkbox
+                    />
+                    <label
+                        class="toggle-item"
+                        for="doggo"
+                        data-todo-checkbox-label
+                    >
+                        <div class="dog">
+                            <div class="ear"></div>
+                            <div class="ear right"></div>
+                            <div class="face">
+                                <div class="eyes"></div>
+                                <div class="mouth"></div>
                             </div>
-                        </label>
+                        </div>
+                    </label>
 
-                        <div class="todo__text" data-todo-text></div>
-                        <div class="todo__date" data-todo-date></div>
-                        <button
-                            class="todo__button-delete"
-                            data-todo-button-delete
-                        >
-                            ❌
-                        </button>
-                    </div>
+                    <div class="todo__text" data-todo-text></div>
+                    <div class="todo__date" data-todo-date></div>
+                    <button class="todo__button-delete" data-todo-button-delete>
+                        ❌
+                    </button>
                 </div>
             </template>
         </div>
