@@ -21,7 +21,6 @@ input[type="checkbox"] {
 }
 .toggle {
     position: relative;
-    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -120,11 +119,9 @@ label.toggle-item:before {
     border-color: white;
     background: white;
 }
-input[type="checkbox"]:checked ~ .cup {
-    animation: 0.2s linear cup 1s forwards;
-}
+
 input[type="checkbox"]:checked + label .dog {
-    left: 68px;
+    left: 60px;
     transform: rotate(360deg);
 }
 input[type="checkbox"]:checked + label .mouth {
