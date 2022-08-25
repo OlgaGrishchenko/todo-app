@@ -105,7 +105,7 @@ function appendTodo() {
             todoContainer.append(todo);
         });
     } else {
-        todoContainer.insertAdjacentHTML('beforeend', `<p class = "noTodos">No todo</p>`);
+        todoContainer.insertAdjacentHTML('beforeend', `<p class = "noTodos">No todos</p>`);
     }
 };
 
@@ -168,15 +168,3 @@ inputSearch.addEventListener ('input', () => {
         } else {value.parentElement.style.display = 'none';}    
         }
     });
-
-
-// inputSearch.addEventListener ('input', () => {
-//     let valueSearch = inputSearch.value.toLowerCase();
-//     if (valueSearch) {
-//     filteredTodoList = todoList.filter((el) =>
-//     el.text.toLowerCase().includes(valueSearch)
-//   );
-//   todoList = filteredTodoList;
-//   render();
-// } 
-// });

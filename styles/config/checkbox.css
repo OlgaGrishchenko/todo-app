@@ -132,3 +132,4 @@ input[type="checkbox"]:checked + label .ear.right {
     transform: scaleX(-1) rotate(-35deg);
     transition-delay: 1s;
 }
+
