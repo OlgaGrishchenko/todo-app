@@ -19,44 +19,36 @@ function saveToLocalStorage () {
 let todoList = [];
 let filteredTodoList = [];
 
-buttonAdd.addEventListener('click', () => {
-    let inputValue = inputTodoAdd.value.trim();
+function addTodo() {
+    {
+        const inputValue = inputTodoAdd.value.trim();
+    
+        if (inputValue) {
+            const newTodo = {
+                id: Date.now(),
+                text: inputValue,
+                date: getDate(),
+                isChecked: false,
+            }
+    
+        todoList.push(newTodo);
+        inputTodoAdd.value = '';
+    }
+    
+    inputTodoAdd.focus();
+    render();
+    }
+};
 
-    if (inputValue) {
-        const newTodo = {
-            id: Date.now(),
-            text: inputValue,
-            date: getDate(),
-            isChecked: false,
-        }
-
-    todoList.push(newTodo);
-    inputTodoAdd.value = '';
-}
-
-inputTodoAdd.focus();
-render();
-});
+buttonAdd.addEventListener('click', () =>
+    addTodo()
+);
 
 inputAdd.addEventListener('keyup', (event) => {
     if (event.key === 'Enter') {
-    let inputValue = inputTodoAdd.value.trim();
-
-    if (inputValue) {
-        const newTodo = {
-            id: Date.now(),
-            text: inputValue,
-            date: getDate(),
-            isChecked: false,
-        }
-
-    todoList.push(newTodo);
-    inputTodoAdd.value = '';
-}
-
-inputTodoAdd.focus();
-    render();
-}});
+        addTodo()
+    }
+});
 
 function createTodo(id, text, isChecked, date) {
     const todoItem = document.importNode(todoItemTemplate.content, true);
@@ -125,7 +117,7 @@ function deleteAll() {
 buttonDeleteAll.addEventListener('click', deleteAll);
 
 const getDate = () => {
-    let date = new Date();
+    const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
@@ -159,10 +151,10 @@ function calcActive() {
 };
 
 inputSearch.addEventListener ('input', () => {
-    let valueSearch = inputSearch.value.toLowerCase();
-    let valueOfTodo = Array.from(document.querySelectorAll('.todo__text'));
+    const valueSearch = inputSearch.value.toLowerCase();
+    const valueOfTodo = Array.from(document.querySelectorAll('.todo__text'));
     for (value of valueOfTodo) {
-        let textValueFromTodo = value.innerHTML.toLowerCase();
+        const textValueFromTodo = value.innerHTML.toLowerCase();
         if (textValueFromTodo.includes(valueSearch)) {
             value.parentElement.style.display = 'flex';
         } else {value.parentElement.style.display = 'none';}    
