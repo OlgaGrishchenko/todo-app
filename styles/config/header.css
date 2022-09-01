@@ -8,7 +8,12 @@ body {
     border: 1px solid #4B8673;
 }
 
-.header__title {
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.header__title, .clock {
     text-align: center;
     text-transform: uppercase;
     font-family: 'Open Sans';

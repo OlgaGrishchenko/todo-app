@@ -12,7 +12,7 @@ const inputSearch = document.querySelector('[data-input-search]');
 const taskActive = document.querySelector('[data-counter-active-span]');
 const taskCompleted = document.querySelector('[data-counter-completed-span]');
 
-function saveToLocalStorage () {
+function saveToLocalStorage() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(todoList));
 };
 
@@ -22,7 +22,7 @@ let filteredTodoList = [];
 function addTodo() {
     {
         const inputValue = inputTodoAdd.value.trim();
-    
+
         if (inputValue) {
             const newTodo = {
                 id: Date.now(),
@@ -30,13 +30,13 @@ function addTodo() {
                 date: getDate(),
                 isChecked: false,
             }
-    
-        todoList.push(newTodo);
-        inputTodoAdd.value = '';
-    }
-    
-    inputTodoAdd.focus();
-    render();
+
+            todoList.push(newTodo);
+            inputTodoAdd.value = '';
+        }
+
+        inputTodoAdd.focus();
+        render();
     }
 };
 
@@ -79,7 +79,7 @@ function createTodo(id, text, isChecked, date) {
         todo.isChecked = !todo.isChecked;
         saveToLocalStorage();
         taskActive.textContent = calcActive();
-    taskCompleted.textContent = calcCompleted();
+        taskCompleted.textContent = calcCompleted();
     });
 
     return todoItem;
@@ -104,7 +104,7 @@ function appendTodo() {
 function render() {
     clearTodo();
     appendTodo();
-    saveToLocalStorage();  
+    saveToLocalStorage();
     taskActive.textContent = calcActive();
     taskCompleted.textContent = calcCompleted();
 };
@@ -150,13 +150,37 @@ function calcActive() {
     return todoList.filter((value) => value.isChecked === false).length;
 };
 
-inputSearch.addEventListener ('input', () => {
+inputSearch.addEventListener('input', () => {
     const valueSearch = inputSearch.value.toLowerCase();
     const valueOfTodo = Array.from(document.querySelectorAll('.todo__text'));
     for (value of valueOfTodo) {
         const textValueFromTodo = value.innerHTML.toLowerCase();
         if (textValueFromTodo.includes(valueSearch)) {
             value.parentElement.style.display = 'flex';
-        } else {value.parentElement.style.display = 'none';}    
-        }
-    });
+        } else { value.parentElement.style.display = 'none'; }
+    }
+});
+
+//clock
+const clock = document.querySelector('[data-clock]');
+
+const UpdateClock = () => {
+    const currentDate = new Date();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+    let seconds = currentDate.getSeconds();
+
+    if (hours < 10) hours = '0' + hours;
+    if (minutes < 10) minutes = '0' + minutes;
+    if (seconds < 10) seconds = '0' + seconds;
+
+    const b = clock.children;
+
+    b[0].textContent = hours;
+    b[1].textContent = minutes;
+    b[2].textContent = seconds;
+};
+
+setInterval(() => {
+    UpdateClock();
+}, 1000);
