@@ -164,7 +164,7 @@ inputSearch.addEventListener('input', () => {
 //clock
 const clock = document.querySelector('[data-clock]');
 
-const UpdateClock = () => {
+const updateClock = () => {
     const currentDate = new Date();
     let hours = currentDate.getHours();
     let minutes = currentDate.getMinutes();
@@ -181,6 +181,8 @@ const UpdateClock = () => {
     b[2].textContent = seconds;
 };
 
+updateClock();
+
 setInterval(() => {
-    UpdateClock();
+    updateClock();
 }, 1000);
